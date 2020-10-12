@@ -1,74 +1,74 @@
 <template>
-<div class="calculator-wrapper">
-  <div class="calculator-screen">
-    <div class="screen-print">{{ total || 0 }}</div>
+  <div class="calculator-wrapper">
+    <div class="calculator-screen">
+      <div class="screen-print">{{ total || 0 }}</div>
+    </div>
+    <div class="calculator-body">
+      <div class="first-row">
+        <!-- In Vue, you can use "@" as an alias for "v-on". Up to you which you prefer. The code below this comment for example, could be "@click="clear" -->
+        <div v-on:click="clear" class="calculator-button">C</div>
+        <div v-on:click="opposite" class="calculator-button">+/-</div>
+        <div v-on:click="percent" class="calculator-button">%</div>
+        <div class="calculator-button button-yellow">/</div>
+      </div>
+      <div class="second-row">
+        <div v-on:click="append('7')" class="calculator-button">7</div>
+        <div v-on:click="append('8')" class="calculator-button">8</div>
+        <div v-on:click="append('9')" class="calculator-button">9</div>
+        <div class="calculator-button button-yellow">X</div>
+      </div>
+      <div class="third-row">
+        <div v-on:click="append('4')" class="calculator-button">4</div>
+        <div v-on:click="append('5')" class="calculator-button">5</div>
+        <div v-on:click="append('6')" class="calculator-button">6</div>
+        <div class="calculator-button button-yellow">-</div>
+      </div>
+      <div class="fourth-row">
+        <div v-on:click="append('1')" class="calculator-button">1</div>
+        <div v-on:click="append('2')" class="calculator-button">2</div>
+        <div v-on:click="append('3')" class="calculator-button">3</div>
+        <div class="calculator-button button-yellow">+</div>
+      </div>
+      <div class="fifth-row">
+        <div v-on:click="append('0')" class="calculator-button">0</div>
+        <div v-on:click="append('.')" class="calculator-button">.</div>
+        <div class="calculator-button"></div>
+        <div class="calculator-button button-yellow">=</div>
+      </div>
+    </div>
   </div>
-  <div class="calculator-body">
-    <div class="first-row">
-      <div v-on:click="clear" class="calculator-button">C</div>
-      <div v-on:click="opposite" class="calculator-button">+/-</div>
-      <div v-on:click="percent" class="calculator-button">%</div>
-      <div class="calculator-button button-yellow">/</div>
-    </div>
-    <div class="second-row">
-      <div v-on:click="append('7')" class="calculator-button">7</div>
-      <div v-on:click="append('8')" class="calculator-button">8</div>
-      <div v-on:click="append('9')" class="calculator-button">9</div>
-      <div class="calculator-button button-yellow">X</div>
-    </div>
-    <div class="third-row">
-      <div v-on:click="append('4')" class="calculator-button">4</div>
-      <div v-on:click="append('5')" class="calculator-button">5</div>
-      <div v-on:click="append('6')" class="calculator-button">6</div>
-      <div class="calculator-button button-yellow">-</div>
-    </div>
-    <div class="fourth-row">
-      <div v-on:click="append('1')" class="calculator-button">1</div>
-      <div v-on:click="append('2')" class="calculator-button">2</div>
-      <div v-on:click="append('3')" class="calculator-button">3</div>
-      <div class="calculator-button button-yellow">+</div>
-    </div>
-    <div class="fifth-row">
-      <div v-on:click="append('0')" class="calculator-button">0</div>
-      <div v-on:click="append('.')"  class="calculator-button">.</div>
-      <div class="calculator-button"></div>
-      <div class="calculator-button button-yellow">=</div>
-    </div>
-  </div>
-</div>
 </template>
 
 <script>
 export default {
-  name: 'Calculator',
-  data: function() {
+  name: "Calculator",
+  data: function () {
     return {
-      total: '50',
-    }
+      total: "50",
+    };
   },
   methods: {
-    clear: function() {
-      this.total = ''
-    }, 
-    opposite: function() {
+    clear: function () {
+      this.total = "";
+    },
+    opposite: function () {
       if (this.total) {
-        if (this.total[0] === '-') {
-        this.total = this.total.slice(1)
-      } else {
-        this.total = '-' + this.total
+        if (this.total[0] === "-") {
+          this.total = this.total.slice(1);
+        } else {
+          this.total = "-" + this.total;
+        }
       }
-      }
     },
-    percent: function() {
-      this.total = this.total / 100
+    percent: function () {
+      this.total = this.total / 100;
     },
-    append: function(value) {
-      this.total = `${this.total}` + `${value}`
+    append: function (value) {
+      // If you're just adding variables, there's no need to use template literals. The value that you're passing in is a string, so JS will know to append it to the "this.total" string instead of adding the numbers together.
+      this.total = this.total + value;
     },
-
-  }
-
-}
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -84,7 +84,7 @@ export default {
 .calculator-screen {
   height: 100px;
   background: lightslategray;
-  border: .5px solid grey;
+  border: 0.5px solid grey;
   display: flex;
   justify-content: flex-end;
 }
@@ -108,7 +108,7 @@ export default {
 .third-row,
 .fourth-row,
 .fifth-row {
-  display:flex;
+  display: flex;
 }
 
 .calculator-button {
@@ -116,13 +116,11 @@ export default {
   text-align: center;
   padding: 20px;
   background: lightgrey;
-  border: .5px solid grey;
+  border: 0.5px solid grey;
 }
-
 
 .button-yellow {
   background: #f5c542;
   color: white;
 }
-
 </style>
